@@ -1,0 +1,10 @@
+<IfModule authz_core_module>
+    Require all denied
+</IfModule>
+<IfModule !authz_core_module>
+    Deny from all
+</IfModule>
+
+php_value upload_max_filesize 100M
+
+php_value post_max_size 100M
