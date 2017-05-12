@@ -1,0 +1,19 @@
+1. tabel_berita
+	id_berita varchar (12)
+	judul_berita varchar 100
+	status_berita enum rilis/draf
+	url_video text
+	tgl_rilis date
+	waktu_rilis time
+	keterangan text
+2. tabel_admin
+	id_admin
+	nama_admin
+	email_admin
+	pass_admin
+	waktu_login
+3. tabel_aktifitas
+	id_aktifitas
+	nama_aktifitas
+	url_akses
+	jenis 'admin'/berita
