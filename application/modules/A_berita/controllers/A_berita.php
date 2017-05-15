@@ -16,6 +16,10 @@ class A_berita extends MY_Controller{
     public function view_tambah_berita(){
         $this->admin_view('V_tambah_berita');
     }  
+    public function view_detail_berita(){
+        $data['data']=$this->M_berita->select_data_detail_berita();
+        $this->load->view('V_detail_berita',$data);
+    }
 
     //-----CRUD -----------
 

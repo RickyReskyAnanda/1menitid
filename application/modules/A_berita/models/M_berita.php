@@ -8,6 +8,13 @@ class M_berita extends CI_Model {
         $this->load->database();
     }
 
+    public function select_data_detail_berita(){
+        $id = $this->input->post('id');
+        
+        $this->db->where('id_berita',$id);
+        return $this->db->get('tabel_berita')->row_array();
+    }
+
     public function select_data_berita(){
         $status = $this->input->post('status');
         $start = $this->input->post('start');
@@ -68,6 +75,7 @@ class M_berita extends CI_Model {
         $data['link_video']     = $this->input->post('link');
         $data['tgl_rilis']      = date('Y-m-d h:i:s');
         $data['tgl_penulisan']  = date('Y-m-d h:i:s');
+        $data['sumber']         = $this->input->post('sumber');
         $data['id_admin']       = 0;//$this->session->userdata('id_admin');
         $this->db->insert('tabel_berita',$data);
 

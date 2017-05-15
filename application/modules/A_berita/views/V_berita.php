@@ -84,28 +84,8 @@
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                 <h4 class="modal-title">Detail Berita</h4>
             </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h3>Ahok Divonis 2 Tahun Penjara</h3>
-                    </div>
-                </div>
-                <div class="row" style="margin-top: 10px;">
-                    <div class="col-md-12">
-                        <figure>
-                            <iframe align="center" width="500" height="400" src="http://www.youtube.com/embed/bwj2s_5e12U" frameborder="0" allowfullscreen></iframe>
-                        </figure>
-                    </div>
-                </div>
-                <div class="row" style="margin-top: 10px;">
-                    <div class="col-md-12">
-                        <p>Ini deskripsi panjangnya tawwa</p>
-                        <p>Sumber : sajdaskjdkajsdjasskj</p>
-                        <label>Penulis : Ricky Resky Ananda</label>
-                    </div>
-                </div>
-
-
+            <div class="modal-body" id="isiDetail">
+                
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
@@ -222,17 +202,14 @@
         ambilData();
     }
 
-    function viewDetail(){
+    function viewDetail(id){
         $.ajax({
             type:"POST",
-            url: "<?=base_url().'A_berita/select_data_berita'?>",
-            data:"status="+statusD+"&start="+batasLooping,
+            url: "<?=base_url().'A_berita/view_detail_berita'?>",
+            data:"id="+id,
             success: function(hasil) {
-                Jhasil = $.parseJSON(hasil);
-
+                $('#isiDetail').html(hasil);
             }
         });
     }
-
-
 </script>

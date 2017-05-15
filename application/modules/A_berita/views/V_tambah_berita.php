@@ -24,6 +24,10 @@
                             <div class="col-sm-10"><input name="link" type="text" class="form-control" required></div>
                         </div>
                         <div class="form-group">
+                            <label class="col-sm-2 control-label">Sumber</label>
+                            <div class="col-sm-10"><input name="sumber" type="text" class="form-control" required></div>
+                        </div>
+                        <div class="form-group">
                             <div class="col-sm-4 col-sm-offset-2">
                                 <button class="btn btn-warning btn-rounded" name="rilis" value="draft" type="submit">Draft</button>
                                 <button class="btn btn-primary btn-rounded" name="rilis" value="rilis" type="submit">Rilis</button>
