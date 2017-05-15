@@ -10,7 +10,7 @@
                 <div class="tab-content">
                     <div id="tab-1" class="tab-pane active">
                         <div class="panel-body">
-                            <button class="btn btn-info btn-rounded"><i class="fa fa-plus"></i> Tambah Berita</button>
+                            <a href="<?=base_url('1menitadmin/berita/tambah')?>"><button class="btn btn-info btn-rounded"><i class="fa fa-plus"></i> Tambah Berita</button></a>
                             <div class="pull-right" style="margin-bottom: 10px;">
                                 <button class="btn btn-rounded btn-info awalBatasId" onclick="awalBatas()">Pertama</button>
                                 <button class="btn btn-rounded btn-info kurangiBatasId" onclick="kurangiBatas()"><</button>
@@ -77,6 +77,45 @@
         </div><!-- .col 12 -->
     </div><!-- .row -->
 </div>
+<div class="modal inmodal" id="detailBerita" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated fadeIn">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Detail Berita</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>Ahok Divonis 2 Tahun Penjara</h3>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 10px;">
+                    <div class="col-md-12">
+                        <figure>
+                            <iframe align="center" width="500" height="400" src="http://www.youtube.com/embed/bwj2s_5e12U" frameborder="0" allowfullscreen></iframe>
+                        </figure>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 10px;">
+                    <div class="col-md-12">
+                        <p>Ini deskripsi panjangnya tawwa</p>
+                        <p>Sumber : sajdaskjdkajsdjasskj</p>
+                        <label>Penulis : Ricky Resky Ananda</label>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script type="text/javascript">
     var batasLooping = 'awal';
     var Jhasil=[];
@@ -109,7 +148,7 @@
                 for (var i=0;i<Jhasil.isi.length;++i){
                     nomor=parseInt(Jhasil.nomor)+1+i;
                     if(Jhasil.isi.length>=1){
-                        $(ident).append('<tr><td>'+(nomor)+'</td><td>'+Jhasil.isi[i].judul_berita+'</td><td>'+Jhasil.isi[i].id_admin+'</td><td>'+Jhasil.isi[i].tgl_rilis+'</td><td><button class="btn btn-info btn-rounded"  data-toggle="modal" data-target=".myModal5" onclick=viewDetail('+Jhasil.isi[i].id_berita+')><i class="fa fa-list-alt"></i> Detail</button></td></tr>');
+                        $(ident).append('<tr><td>'+(nomor)+'</td><td>'+Jhasil.isi[i].judul_berita+'</td><td>'+Jhasil.isi[i].id_admin+'</td><td>'+Jhasil.isi[i].tgl_rilis+'</td><td><button class="btn btn-info btn-rounded"  data-toggle="modal" data-target="#detailBerita" onclick=viewDetail('+Jhasil.isi[i].id_berita+')><i class="fa fa-list-alt"></i> Detail</button></td></tr>');
                     }else{
                         $(ident).append('<tr><td colspan="5"></td></tr>');
                     }
@@ -181,6 +220,18 @@
     function akhirBatas(){
         batasLooping='akhir';
         ambilData();
+    }
+
+    function viewDetail(){
+        $.ajax({
+            type:"POST",
+            url: "<?=base_url().'A_berita/select_data_berita'?>",
+            data:"status="+statusD+"&start="+batasLooping,
+            success: function(hasil) {
+                Jhasil = $.parseJSON(hasil);
+
+            }
+        });
     }
 
 

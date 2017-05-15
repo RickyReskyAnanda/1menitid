@@ -20,20 +20,22 @@ class M_berita extends CI_Model {
             $start=$start-($start%10);
         }
         $data['nomor'] = $start;
-// print_r($start);
+
         $this->db->where('status',$status);
+        $this->db->order_by('id_berita', 'desc');
         $this->db->limit(10,$start);
         $data['isi'] = $this->db->get('tabel_berita')->result_array();
 
         echo json_encode($data);
     }
 
-    public function insert_data_admin(){
+    public function insert_data_berita(){
+        date_default_timezone_set("Asia/Jakarta");
         $nama_gambar='';
         if($_FILES['gambar_dp']['name']){
             $nmfile = "dp_".date("Ymdhis"); //nama file saya beri nama langsung dan diikuti fungsi time
             $config['file_name']        = $nmfile; //nama yang terupload nantinya
-            $config['upload_path']      = 'image/gambar_portofolio/dp'; //path folder
+            $config['upload_path']      = 'assets/xyz'; //path folder
             $config['allowed_types']    = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
             $config['max_size']         = '10000'; //maksimum besar file 2M
             $config['max_width']        = '7000'; //lebar maksimum 1288 px
@@ -57,15 +59,21 @@ class M_berita extends CI_Model {
             $this->image_lib->initialize($config);
             $this->image_lib->resize();
         }
+        // print_r($nama_gambar);die;
 
         $data['judul_berita']   = $this->input->post('judul_berita');
         $data['deskripsi']      = $this->input->post('deskripsi');
-        $data['status']         = $this->input->post('status');
+        $data['status']         = $this->input->post('rilis');
+        $data['gambar']         = $nama_gambar;
+        $data['link_video']     = $this->input->post('link');
         $data['tgl_rilis']      = date('Y-m-d h:i:s');
         $data['tgl_penulisan']  = date('Y-m-d h:i:s');
-        $data['id_admin']       = $this->session->userdata('id_admin');
-        $data['gambar']         = $nama_gambar;
-        $this->db->insert('tabel_admin',$data);
+        $data['id_admin']       = 0;//$this->session->userdata('id_admin');
+        $this->db->insert('tabel_berita',$data);
+
+        $this->session->set_flashdata('pesanproses', 'Berita berhasil di input');
+
+        redirect('1menitadmin/berita');
     }
 
     public function update_data_admin(){
