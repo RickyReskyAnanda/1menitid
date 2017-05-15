@@ -29,6 +29,9 @@ class A_berita extends MY_Controller{
         public function insert_data_berita(){
             $this->M_berita->insert_data_berita();
         }
+        public function delete_data_berita(){
+            $this->M_berita->delete_data_berita();
+        }
 
     
 }

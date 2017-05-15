@@ -12,8 +12,10 @@
 
     <link href="<?=base_url()?>admin/css/animate.css" rel="stylesheet">
     <link href="<?=base_url()?>admin/css/style.css" rel="stylesheet">
+    <link href="<?=base_url()?>admin/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
     <script src="<?=base_url()?>admin/js/jquery-2.1.1.js"></script>
     <script src="<?=base_url()?>admin/js/bootstrap.min.js"></script>
+
 
 </head>
 

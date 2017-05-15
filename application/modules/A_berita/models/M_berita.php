@@ -123,13 +123,14 @@ class M_berita extends CI_Model {
         $this->db->insert('tabel_admin',$data);
     }
 
-    public function delete_data_admin(){ //hapus data rilis
+    public function delete_data_berita(){ //hapus data rilis
 
-        $this->db->where('id_admin', $val->id);
-        if($this->db->delete('table_admin')){
-            echo "Berhasil Menghapus Data";
+        $id = $this->input->post('id');
+        $this->db->where('id_berita', $id);
+        if($this->db->delete('tabel_berita')){
+            echo "berhasil";
         }else{
-            echo "Gagal Menghapus Data";
+            echo "gagal";
         }
     }
 

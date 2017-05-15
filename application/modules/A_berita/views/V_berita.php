@@ -81,15 +81,17 @@
     <div class="modal-dialog">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <button type="button" class="close" data-dismiss="modal" onclick="tutupModal()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                 <h4 class="modal-title">Detail Berita</h4>
             </div>
             <div class="modal-body" id="isiDetail">
                 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-danger btn-rounded" id="btnHapus" onclick="deleteBerita()">Hapus</button>
+                <button type="button" class="btn btn-warning btn-rounded" id="btnDraft">Draft</button>
+                <button type="button" class="btn btn-info btn-rounded" id="btnRilis">Rilis</button>
+                <button type="button" class="btn btn-white btn-rounded" data-dismiss="modal" onclick="tutupModal()">Close</button>
             </div>
         </div>
     </div>
@@ -128,7 +130,7 @@
                 for (var i=0;i<Jhasil.isi.length;++i){
                     nomor=parseInt(Jhasil.nomor)+1+i;
                     if(Jhasil.isi.length>=1){
-                        $(ident).append('<tr><td>'+(nomor)+'</td><td>'+Jhasil.isi[i].judul_berita+'</td><td>'+Jhasil.isi[i].id_admin+'</td><td>'+Jhasil.isi[i].tgl_rilis+'</td><td><button class="btn btn-info btn-rounded"  data-toggle="modal" data-target="#detailBerita" onclick=viewDetail('+Jhasil.isi[i].id_berita+')><i class="fa fa-list-alt"></i> Detail</button></td></tr>');
+                        $(ident).append('<tr><td>'+(nomor)+'</td><td>'+Jhasil.isi[i].judul_berita+'</td><td>'+Jhasil.isi[i].id_admin+'</td><td>'+Jhasil.isi[i].tgl_rilis+'</td><td><button class="btn btn-primary btn-rounded"  data-toggle="modal" data-target="#detailBerita" data-backdrop="false" onclick=viewDetail('+Jhasil.isi[i].id_berita+')><i class="fa fa-list-alt"></i> Detail</button></td></tr>');
                     }else{
                         $(ident).append('<tr><td colspan="5"></td></tr>');
                     }
@@ -202,14 +204,63 @@
         ambilData();
     }
 
+    function btnModal(tampil){
+        if(tampil==false){
+            $('#btnRilis').hide();
+            $('#btnDraft').hide();
+            $('#btnHapus').hide();
+        }else{
+            $('#btnRilis').show();
+            $('#btnDraft').show();
+            $('#btnHapus').show();
+        }
+    }
+    var identitasBerita=0;
+    btnModal(false);
     function viewDetail(id){
+        identitasBerita=id;
         $.ajax({
             type:"POST",
             url: "<?=base_url().'A_berita/view_detail_berita'?>",
             data:"id="+id,
             success: function(hasil) {
                 $('#isiDetail').html(hasil);
+                btnModal(true);
             }
         });
+    }
+
+    function deleteBerita(){
+        swal({
+            title: "Apakah Anda Ingin Menghapus Berita ?",
+            text: "Berita akan terhapus dan tidak dapat dikembalikan lagi!",
+            type: "warning",
+            showCancelButton: true,
+            cancelButtonText: "Batal",
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Ya!",
+            closeOnConfirm: false
+        }, function () {
+            $.ajax({
+                type:"POST",
+                url: "<?=base_url().'A_berita/delete_data_berita'?>",
+                data:"id="+identitasBerita,
+                success: function(hasil) {
+                    if(hasil=='berhasil'){
+                        swal("Berhasil!", "Berhasil menghapus berita.", "success");
+                        $('#isiDetail').html('<h2>Berita telah dihapus</h2>');
+                        ambilData();
+                        btnModal(false);
+
+                    }else{
+                        swal("Gagal!", "Gagal menghapus berita.", "error");
+                    }
+                }
+            });
+        });
+    }
+
+    function tutupModal(){
+        $('#isiDetail').html('');
     }
 </script>

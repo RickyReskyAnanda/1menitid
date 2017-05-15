@@ -16,6 +16,7 @@
     <!-- Custom and plugin javascript -->
     <script src="<?=base_url()?>admin/js/inspinia.js"></script>
     <script src="<?=base_url()?>admin/js/plugins/pace/pace.min.js"></script>
+    <script src="<?=base_url()?>admin/js/plugins/sweetalert/sweetalert.min.js"></script>
 
     <!-- jQuery UI -->
     <script src="<?=base_url()?>admin/js/plugins/jquery-ui/jquery-ui.min.js"></script>

@@ -12,7 +12,7 @@
 </div>
 <div class="row" style="margin-top: 10px;">
     <div class="col-md-12">
-        <p><i class="fa fa-clock-o"></i> <?=$data['tgl_rilis']?></p>
+        <p><i class="fa fa-clock-o"></i> <?=date_format(date_create($data['tgl_rilis']), "d F Y, h:m ")?></p>
         <p><?=$data['deskripsi']?></p>
         <p>Sumber : <?=$data['sumber']?></p>
         <label>Penulis : <?=$data['id_admin']?></label>
