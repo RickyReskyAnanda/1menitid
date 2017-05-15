@@ -89,8 +89,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger btn-rounded" id="btnHapus" onclick="deleteBerita()">Hapus</button>
-                <button type="button" class="btn btn-warning btn-rounded" id="btnDraft">Draft</button>
-                <button type="button" class="btn btn-info btn-rounded" id="btnRilis">Rilis</button>
+                <button type="button" onclick="ubahStatusBerita('rilis')" class="btn btn-warning btn-rounded" id="btnDraft">Draft</button>
+                <button type="button" onclick="ubahStatusBerita('draft')" class="btn btn-info btn-rounded" id="btnRilis">Rilis</button>
                 <button type="button" class="btn btn-white btn-rounded" data-dismiss="modal" onclick="tutupModal()">Close</button>
             </div>
         </div>
@@ -226,6 +226,9 @@
             success: function(hasil) {
                 $('#isiDetail').html(hasil);
                 btnModal(true);
+            },
+            error: function(){
+                $('#isiDetail').html('<h2>Ada Gangguan Jaringan !</h2>');
             }
         });
     }
@@ -259,8 +262,35 @@
             });
         });
     }
+    function ubahStatusBerita(status){
+        swal({
+            title: "Apakah Anda Ingin Mengganti Status Berita ?",
+            text: "Berita akan tersimpan di tabel berbeda!",
+            type: "warning",
+            showCancelButton: true,
+            cancelButtonText: "Batal",
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Ya!",
+            closeOnConfirm: false
+        }, function () {
+            $.ajax({
+                type:"POST",
+                url: "<?=base_url().'A_berita/update_status_data_berita'?>",
+                data:"id="+identitasBerita,
+                success: function(hasil) {
+                    if(hasil=='berhasil'){
+                        swal("Berhasil!", "Berhasil mengubah status berita.", "success");
+                        ambilData();
+                    }else{
+                        swal("Gagal!", "Gagal mengubah status berita.", "error");
+                    }
+                }
+            });
+        });
+    }
 
     function tutupModal(){
         $('#isiDetail').html('');
+        btnModal(false);
     }
 </script>
