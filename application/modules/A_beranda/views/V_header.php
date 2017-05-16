@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>INSPINIA | Dashboard v.2</title>
+    <title>1Menit.id - Administrator</title>
 
     <link href="<?=base_url()?>admin/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?=base_url()?>admin/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -40,17 +40,17 @@
                         </ul>
                     </div>
                     <div class="logo-element">
-                        IN+
+                        1MID
                     </div>
                 </li>
                 <li>
-                    <a href="layouts.html"><i class="fa fa-diamond"></i> <span class="nav-label">Beranda</span></a>
+                    <a href="layouts.html"><i class="fa fa-th-large"></i> <span class="nav-label">Beranda</span></a>
                 </li>
                 <li>
-                    <a href="<?=base_url('1menitadmin/berita')?>"><i class="fa fa-diamond"></i> <span class="nav-label">Berita</span></a>
+                    <a href="<?=base_url('1menitadmin/berita')?>"><i class="fa fa-newspaper-o"></i> <span class="nav-label">Berita</span></a>
                 </li>
                 <li>
-                    <a href="layouts.html"><i class="fa fa-diamond"></i> <span class="nav-label">Kategori</span></a>
+                    <a href="layouts.html"><i class="fa fa-users"></i> <span class="nav-label">Admin dan User</span></a>
                 </li>
             </ul>
 
@@ -60,17 +60,10 @@
         <div id="page-wrapper" class="gray-bg">
         <div class="row border-bottom">
         <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
-        <div class="navbar-header">
-            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-            <form role="search" class="navbar-form-custom" action="http://webapplayers.com/inspinia_admin-v2.3/search_results.html">
-                <div class="form-group">
-                    <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
-                </div>
-            </form>
-        </div>
+        
             <ul class="nav navbar-top-links navbar-right">
                 <li>
-                    <span class="m-r-sm text-muted welcome-message">Welcome to INSPINIA+ Admin Theme.</span>
+                    <span class="m-r-sm text-muted welcome-message">Selamat Datang di <strong>1menit.id</strong> Admin</span>
                 </li>
                 <li class="dropdown">
                     <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
@@ -171,12 +164,7 @@
 
                 <li>
                     <a href="login.html">
-                        <i class="fa fa-sign-out"></i> Log out
-                    </a>
-                </li>
-                <li>
-                    <a class="right-sidebar-toggle">
-                        <i class="fa fa-tasks"></i>
+                        <i class="fa fa-sign-out"></i> Keluar
                     </a>
                 </li>
             </ul>

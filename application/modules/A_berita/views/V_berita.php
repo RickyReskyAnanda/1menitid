@@ -41,7 +41,7 @@
                     </div>
                     <div id="tab-2" class="tab-pane">
                         <div class="panel-body">
-                            <button class="btn btn-info btn-rounded"><i class="fa fa-plus"></i> Tambah Berita</button>
+                            <a href="<?=base_url('1menitadmin/berita/tambah')?>"><button class="btn btn-info btn-rounded"><i class="fa fa-plus"></i> Tambah Berita</button></a>
                             <div class="pull-right" style="margin-bottom: 10px;">
                                 <button class="btn btn-rounded btn-info awalBatasId" onclick="awalBatas()">Pertama</button>
                                 <button class="btn btn-rounded btn-info kurangiBatasId" onclick="kurangiBatas()"><</button>
@@ -89,8 +89,12 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger btn-rounded" id="btnHapus" onclick="deleteBerita()">Hapus</button>
-                <button type="button" onclick="ubahStatusBerita('rilis')" class="btn btn-warning btn-rounded" id="btnDraft">Draft</button>
-                <button type="button" onclick="ubahStatusBerita('draft')" class="btn btn-info btn-rounded" id="btnRilis">Rilis</button>
+                <button type="button" onclick="ubahStatusBerita('draft')" class="btn btn-warning btn-rounded" id="btnDraft">Draft</button>
+
+                <a href="" id="aEdit">
+                    <button type="button" class="btn btn-primary btn-rounded" id="btnEdit">Edit</button>
+                </a>
+                <button type="button" class="btn btn-info btn-rounded" id="btnRilis" onclick="ubahStatusBerita('rilis')">Rilis</button>
                 <button type="button" class="btn btn-white btn-rounded" data-dismiss="modal" onclick="tutupModal()">Close</button>
             </div>
         </div>
@@ -124,16 +128,13 @@
             url: "<?=base_url().'A_berita/select_data_berita'?>",
             data:"status="+statusD+"&start="+batasLooping,
             success: function(hasil) {
-                // alert(hasil);
                 Jhasil = $.parseJSON(hasil);
-
                 for (var i=0;i<Jhasil.isi.length;++i){
                     nomor=parseInt(Jhasil.nomor)+1+i;
-                    if(Jhasil.isi.length>=1){
-                        $(ident).append('<tr><td>'+(nomor)+'</td><td>'+Jhasil.isi[i].judul_berita+'</td><td>'+Jhasil.isi[i].id_admin+'</td><td>'+Jhasil.isi[i].tgl_rilis+'</td><td><button class="btn btn-primary btn-rounded"  data-toggle="modal" data-target="#detailBerita" data-backdrop="false" onclick=viewDetail('+Jhasil.isi[i].id_berita+')><i class="fa fa-list-alt"></i> Detail</button></td></tr>');
-                    }else{
-                        $(ident).append('<tr><td colspan="5"></td></tr>');
-                    }
+                    $(ident).append('<tr><td>'+(nomor)+'</td><td>'+Jhasil.isi[i].judul_berita+'</td><td>'+Jhasil.isi[i].id_admin+'</td><td>'+Jhasil.isi[i].tgl_rilis+'</td><td><button class="btn btn-primary btn-rounded"  data-toggle="modal" data-target="#detailBerita" data-backdrop="false" onclick=viewDetail('+Jhasil.isi[i].id_berita+')><i class="fa fa-list-alt"></i> Detail</button></td></tr>');
+                }
+                if(Jhasil.isi.length=='0'){
+                    $(ident).append('<tr><td colspan="5"><h3 align="center">Data Kosong </h3></td></tr>');
                 }
 
                 if(batasLooping=='awal'){
@@ -209,9 +210,16 @@
             $('#btnRilis').hide();
             $('#btnDraft').hide();
             $('#btnHapus').hide();
+            $('#btnEdit').hide();
         }else{
-            $('#btnRilis').show();
-            $('#btnDraft').show();
+            if(statusD=='draft'){
+                $('#btnRilis').show();
+                $('#btnDraft').hide();
+            }else if(statusD=='rilis'){
+                $('#btnRilis').hide();
+                $('#btnDraft').show();
+            }
+            $('#btnEdit').show();
             $('#btnHapus').show();
         }
     }
@@ -231,6 +239,9 @@
                 $('#isiDetail').html('<h2>Ada Gangguan Jaringan !</h2>');
             }
         });
+
+        $('#aEdit').prop('href', '<?=base_url()?>1menitadmin/berita/edit/'+id);
+        
     }
 
     function deleteBerita(){
@@ -276,7 +287,7 @@
             $.ajax({
                 type:"POST",
                 url: "<?=base_url().'A_berita/update_status_data_berita'?>",
-                data:"id="+identitasBerita,
+                data:"id="+identitasBerita+"&status="+status,
                 success: function(hasil) {
                     if(hasil=='berhasil'){
                         swal("Berhasil!", "Berhasil mengubah status berita.", "success");
@@ -284,6 +295,9 @@
                     }else{
                         swal("Gagal!", "Gagal mengubah status berita.", "error");
                     }
+                },
+                error: function(){
+                    swal("Gagal!", "Terjadi Masalah", "error");
                 }
             });
         });

@@ -16,6 +16,10 @@ class A_berita extends MY_Controller{
     public function view_tambah_berita(){
         $this->admin_view('V_tambah_berita');
     }  
+    public function view_edit_berita(){
+        $data['data'] = $this->M_berita->select_data_edit_berita();
+        $this->admin_view('V_edit_berita',$data);
+    }  
     public function view_detail_berita(){
         $data['data']=$this->M_berita->select_data_detail_berita();
         $this->load->view('V_detail_berita',$data);
@@ -31,6 +35,9 @@ class A_berita extends MY_Controller{
         }
         public function delete_data_berita(){
             $this->M_berita->delete_data_berita();
+        }
+        public function update_status_data_berita(){
+            $this->M_berita->update_status_data_berita();
         }
 
     

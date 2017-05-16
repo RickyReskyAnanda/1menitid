@@ -14,6 +14,12 @@ class M_berita extends CI_Model {
         $this->db->where('id_berita',$id);
         return $this->db->get('tabel_berita')->row_array();
     }
+    public function select_data_edit_berita(){
+        $id = $this->uri->segment(4);
+        
+        $this->db->where('id_berita',$id);
+        return $this->db->get('tabel_berita')->row_array();
+    }
 
     public function select_data_berita(){
         $status = $this->input->post('status');
@@ -37,7 +43,7 @@ class M_berita extends CI_Model {
     }
 
     public function insert_data_berita(){
-        date_default_timezone_set("Asia/Jakarta");
+        date_default_timezone_set("Asia/Makassar");
         $nama_gambar='';
         if($_FILES['gambar_dp']['name']){
             $nmfile = "dp_".date("Ymdhis"); //nama file saya beri nama langsung dan diikuti fungsi time
@@ -120,7 +126,7 @@ class M_berita extends CI_Model {
         $data['judul_berita']   = $this->input->post('judul_berita');
         $data['deskripsi']      = $this->input->post('deskripsi');
         $data['status']         = $this->input->post('status');
-        $this->db->insert('tabel_admin',$data);
+        $this->db->insert('tabel_berita',$data);
     }
 
     public function delete_data_berita(){ //hapus data rilis
@@ -128,6 +134,20 @@ class M_berita extends CI_Model {
         $id = $this->input->post('id');
         $this->db->where('id_berita', $id);
         if($this->db->delete('tabel_berita')){
+            echo "berhasil";
+        }else{
+            echo "gagal";
+        }
+    }
+
+    public function update_status_data_berita(){
+        $id = $this->input->post('id');
+
+        date_default_timezone_set("Asia/Makassar");
+        $data['status'] = $this->input->post('status');
+        $data['tgl_rilis'] = date('y-m-d h:i:s');
+        $this->db->where('id_berita',$id);
+        if($this->db->update('tabel_berita',$data)){
             echo "berhasil";
         }else{
             echo "gagal";
