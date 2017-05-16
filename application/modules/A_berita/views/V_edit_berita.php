@@ -18,7 +18,10 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Gambar</label>
                             <div class="col-sm-4">
-                                <input name="gambar_dp" type="file" class="form-control" required>
+                                <input name="gambar_dp" type="file" class="form-control">
+                                *input untuk mengganti
+                            </div>
+                            <div class="col-sm-6">
                                 <img class="img-responsive img-thumbnail" src="<?=base_url()?>assets/xyz/<?=$data['gambar']?>">
                             </div>
                         </div>
@@ -29,9 +32,9 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Status</label>
                             <div class="col-sm-10">
-                                <select class="form-control">
-                                    <option>Rilis</option>
-                                    <option>Draft</option>
+                                <select class="form-control" name="status" required>
+                                    <option value="rilis" <?php if ($data['status']=='rilis')echo 'selected' ?>>Rilis</option>
+                                    <option value="draft" <?php if ($data['status']=='draft')echo 'selected' ?>>Draft</option>
                                 </select>
                             </div>
                         </div>
@@ -41,7 +44,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-sm-4 col-sm-offset-2">
-                                <button class="btn btn-primary btn-rounded" type="submit">Rilis</button>
+                                <button class="btn btn-primary btn-rounded" type="submit">Simpan</button>
                             </div>
                         </div>
                     </form>

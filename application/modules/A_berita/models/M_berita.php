@@ -90,13 +90,12 @@ class M_berita extends CI_Model {
         redirect('1menitadmin/berita');
     }
 
-    public function update_data_admin(){
-        $data=array();
-        $nama_gambar='';
+    public function update_data_berita(){
+       $nama_gambar='';
         if($_FILES['gambar_dp']['name']){
             $nmfile = "dp_".date("Ymdhis"); //nama file saya beri nama langsung dan diikuti fungsi time
             $config['file_name']        = $nmfile; //nama yang terupload nantinya
-            $config['upload_path']      = 'image/gambar_portofolio/dp'; //path folder
+            $config['upload_path']      = 'assets/xyz'; //path folder
             $config['allowed_types']    = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
             $config['max_size']         = '10000'; //maksimum besar file 2M
             $config['max_width']        = '7000'; //lebar maksimum 1288 px
@@ -119,14 +118,23 @@ class M_berita extends CI_Model {
             $config['quality']          = '100';
             $this->image_lib->initialize($config);
             $this->image_lib->resize();
-            
-            $data['gambar']         = $nama_gambar;
         }
+        // print_r($nama_gambar);die;
 
         $data['judul_berita']   = $this->input->post('judul_berita');
         $data['deskripsi']      = $this->input->post('deskripsi');
-        $data['status']         = $this->input->post('status');
+        $data['status']         = $this->input->post('rilis');
+        $data['gambar']         = $nama_gambar;
+        $data['link_video']     = $this->input->post('link');
+        $data['tgl_rilis']      = date('Y-m-d h:i:s');
+        $data['tgl_penulisan']  = date('Y-m-d h:i:s');
+        $data['sumber']         = $this->input->post('sumber');
+        $data['id_admin']       = 0;//$this->session->userdata('id_admin');
         $this->db->insert('tabel_berita',$data);
+
+        $this->session->set_flashdata('pesanproses', 'Berita berhasil di input');
+
+        redirect('1menitadmin/berita');
     }
 
     public function delete_data_berita(){ //hapus data rilis
