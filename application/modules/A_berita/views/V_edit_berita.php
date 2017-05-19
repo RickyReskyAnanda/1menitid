@@ -7,6 +7,8 @@
                 </div>
                 <div class="ibox-content">
                     <form method="post" action="<?=base_url('A_berita/update_data_berita')?>" class="form-horizontal" enctype="multipart/form-data">
+                        <input type="hidden" name="id_berita" value="<?=$data['id_berita']?>">
+                        <input type="hidden" name="gambar_lama" value="<?=$data['gambar']?>">
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Judul Berita</label>
                             <div class="col-sm-10"><input name="judul_berita" type="text" class="form-control" value="<?=$data['judul_berita']?>" required></div>

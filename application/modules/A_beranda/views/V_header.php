@@ -26,17 +26,15 @@
             <ul class="nav metismenu" id="side-menu">
                 <li class="nav-header">
                     <div class="dropdown profile-element"> <span>
-                            <img alt="image" class="img-circle" src="img/profile_small.jpg" />
+                            <img alt="image" class="img-circle img-responsive " src="<?=base_url()?>admin/img/user.ico" />
                              </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">David Williams</strong>
-                             </span> <span class="text-muted text-xs block">Art Director <b class="caret"></b></span> </span> </a>
+                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold"><?= ucfirst($this->session->userdata('nama')) ?></strong>
+                             </span> <span class="text-muted text-xs block"><?= ucfirst($this->session->userdata('posisi').' - '.ucfirst($this->session->userdata('role'))) ?> <b class="caret"></b></span> </span> </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a href="profile.html">Profile</a></li>
-                            <li><a href="contacts.html">Contacts</a></li>
-                            <li><a href="mailbox.html">Mailbox</a></li>
+                            <li><a href="<?=base_url('1menitadmin/profil')?>">Profil</a></li>
                             <li class="divider"></li>
-                            <li><a href="login.html">Logout</a></li>
+                            <li><a href="<?=base_url('1menitadmin/keluar')?>">Keluar</a></li>
                         </ul>
                     </div>
                     <div class="logo-element">
@@ -44,13 +42,13 @@
                     </div>
                 </li>
                 <li>
-                    <a href="layouts.html"><i class="fa fa-th-large"></i> <span class="nav-label">Beranda</span></a>
+                    <a href="<?=base_url('1menitadmin/beranda')?>"><i class="fa fa-th-large"></i> <span class="nav-label">Beranda</span></a>
                 </li>
                 <li>
                     <a href="<?=base_url('1menitadmin/berita')?>"><i class="fa fa-newspaper-o"></i> <span class="nav-label">Berita</span></a>
                 </li>
                 <li>
-                    <a href="layouts.html"><i class="fa fa-users"></i> <span class="nav-label">Admin dan User</span></a>
+                    <a href="<?=base_url('1menitadmin/akun')?>"><i class="fa fa-users"></i> <span class="nav-label">Admin dan Editor</span></a>
                 </li>
             </ul>
 
@@ -163,7 +161,7 @@
 
 
                 <li>
-                    <a href="login.html">
+                    <a href="<?=base_url('1menitadmin/keluar')?>">
                         <i class="fa fa-sign-out"></i> Keluar
                     </a>
                 </li>

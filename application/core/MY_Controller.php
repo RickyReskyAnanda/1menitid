@@ -25,10 +25,10 @@ class MY_Controller extends CI_Controller{
 
     //redirect login
     public function cek_session($modelnya){
-        $logged_in = $this->session->userdata('logged_in_y');
-        if($logged_in != "xdev") {
-            $this->session->set_flashdata('u_pesan', 'Silahkan Login Kembali !');
-            redirect('login');
+        $logged_in = $this->session->userdata('logged_in');
+        if($logged_in != "78jhk391menitID") {
+            $this->session->set_flashdata('pesan', 'Silahkan Login Kembali !');
+            redirect('1menitadmin');
         }else{
             $this->load->model($modelnya);
         } 

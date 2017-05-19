@@ -1,0 +1,14 @@
+/*
+Theme Name: VideoTube Child
+Description: A Video Hosted wordpress theme powered by Bootstrap, Youtube.com, Vimeo.com is supported.
+Author: Toan Nguyen
+Theme URI: http://themeforest.net/item/videotube-a-responsive-video-wordpress-theme/7214445?ref=phpface
+Author URI: http://themeforest.net/user/phpface
+Version: 1.0.4.2
+Template: videotube
+License: GNU General Public License
+License URI: license.txt
+Text Domain: mars
+Tags: fixed-layout, fluid-layout, responsive-layout, translation-ready, light, white, one-column, two-columns, right-sidebar,custom-menu, editor-style, featured-images,  sticky-post, theme-options, translation-ready
+*/
+@import url("../videotube/style.css");

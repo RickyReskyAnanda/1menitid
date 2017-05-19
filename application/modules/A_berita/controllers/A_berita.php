@@ -6,8 +6,7 @@ class A_berita extends MY_Controller{
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('M_berita');
-        
+        $this->cek_session('M_berita');
     }
 
     public function index(){

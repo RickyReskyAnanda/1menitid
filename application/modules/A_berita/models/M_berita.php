@@ -92,6 +92,7 @@ class M_berita extends CI_Model {
 
     public function update_data_berita(){
        $nama_gambar='';
+       $data=array();
         if($_FILES['gambar_dp']['name']){
             $nmfile = "dp_".date("Ymdhis"); //nama file saya beri nama langsung dan diikuti fungsi time
             $config['file_name']        = $nmfile; //nama yang terupload nantinya
@@ -118,22 +119,23 @@ class M_berita extends CI_Model {
             $config['quality']          = '100';
             $this->image_lib->initialize($config);
             $this->image_lib->resize();
+
+            $data['gambar']         = $nama_gambar;
+
+            unlink('assets/xyz/'.$this->input->post('gambar_lama'));
         }
-        // print_r($nama_gambar);die;
+
+        
 
         $data['judul_berita']   = $this->input->post('judul_berita');
         $data['deskripsi']      = $this->input->post('deskripsi');
-        $data['status']         = $this->input->post('rilis');
-        $data['gambar']         = $nama_gambar;
+        $data['status']         = $this->input->post('status');
         $data['link_video']     = $this->input->post('link');
-        $data['tgl_rilis']      = date('Y-m-d h:i:s');
-        $data['tgl_penulisan']  = date('Y-m-d h:i:s');
         $data['sumber']         = $this->input->post('sumber');
-        $data['id_admin']       = 0;//$this->session->userdata('id_admin');
-        $this->db->insert('tabel_berita',$data);
+        $this->db->where('id_berita',$this->input->post('id_berita'));
+        $this->db->update('tabel_berita',$data);
 
-        $this->session->set_flashdata('pesanproses', 'Berita berhasil di input');
-
+        $this->session->set_flashdata('pesanproses', 'Berita berhasil di perbaharui');
         redirect('1menitadmin/berita');
     }
 
@@ -141,7 +143,11 @@ class M_berita extends CI_Model {
 
         $id = $this->input->post('id');
         $this->db->where('id_berita', $id);
+        $data = $this->db->get('tabel_berita')->row_array();
+        
+        $this->db->where('id_berita', $id);
         if($this->db->delete('tabel_berita')){
+            unlink('assets/xyz/'.$data['gambar']);
             echo "berhasil";
         }else{
             echo "gagal";

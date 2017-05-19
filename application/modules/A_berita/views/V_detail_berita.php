@@ -6,7 +6,7 @@
 <div class="row" style="margin-top: 10px;">
     <div class="col-md-12">
         <figure>
-            <iframe align="center" width="500" height="400" src="<?=$data['link_video']?>" frameborder="0" allowfullscreen></iframe>
+            <iframe align="center" width="100%" height="400" src="<?=$data['link_video']?>" frameborder="0" allowfullscreen></iframe>
         </figure>
     </div>
 </div>

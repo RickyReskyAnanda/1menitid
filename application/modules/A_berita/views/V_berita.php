@@ -2,6 +2,12 @@
 <div class="wrapper wrapper-content">
     <div class="row">
         <div class="col-md-12">
+            <?php if($this->session->flashdata('pesanproses')!=''){?>
+            <div class="alert alert-success alert-dismissable">
+                <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                <?= ucfirst($this->session->flashdata('pesanproses')); ?>
+            </div>
+            <?php } ?>
             <div class="tabs-container">
                 <ul class="nav nav-tabs">
                     <li class="active" onclick="statusData('rilis')"><a data-toggle="tab" href="#tab-1">Berita Rilis</a></li>
