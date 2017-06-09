@@ -1,1 +1,9 @@
 /* Add here all your CSS customizations */
+
+.header-nav>button{
+	float:left;
+}
+
+.ui>img{
+	margin-top: 10px;
+}

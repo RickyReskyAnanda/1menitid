@@ -8,15 +8,11 @@ class MY_Controller extends CI_Controller{
         parent::__construct();
     }
     public function home_view($page_isi,$data){
-        $this->load->view('H_beranda/V_header',$data);
+        $this->load->view('H_homepage/V_header',$data);
         $this->load->view($page_isi,$data);
-        $this->load->view('H_beranda/V_footer');
+        $this->load->view('H_homepage/V_footer');
     }
-    public function user_view($page_isi,$data){
-        $this->load->view('U_beranda/V_head',$data);
-        $this->load->view($page_isi,$data);
-        $this->load->view('U_beranda/V_footer');
-    }
+   
     public function admin_view($page_isi,$data=array()){
         $this->load->view('A_beranda/V_header',$data);
         $this->load->view($page_isi,$data);

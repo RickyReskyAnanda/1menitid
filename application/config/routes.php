@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$route['default_controller'] 		= 'H_beranda';
+$route['default_controller'] 		= 'H_homepage';
 $route['404_override'] 				= 'H_beranda/not_found';
 $route['translate_uri_dashes'] 		= FALSE;
 
@@ -17,3 +17,5 @@ $route['1menitadmin/berita/tambah'] 	= 'A_berita/view_tambah_berita';
 $route['1menitadmin/berita/edit/:num'] 	= 'A_berita/view_edit_berita';
 
 $route['1menitadmin/akun']	= 'A_akun';
+
+$route[':any/:num']	= 'H_berita';

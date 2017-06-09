@@ -46,6 +46,7 @@ class M_berita extends CI_Model {
         date_default_timezone_set("Asia/Makassar");
         $nama_gambar='';
         if($_FILES['gambar_dp']['name']){
+        
             $nmfile = "dp_".date("Ymdhis"); //nama file saya beri nama langsung dan diikuti fungsi time
             $config['file_name']        = $nmfile; //nama yang terupload nantinya
             $config['upload_path']      = 'assets/xyz'; //path folder
@@ -66,9 +67,20 @@ class M_berita extends CI_Model {
             $config['image_library']    = 'gd2';
             $config['source_image']     = $this->upload->upload_path.$this->upload->file_name;
             $config['maintain_ratio']   = true;
-            $config['width']            = '400';
-            $config['height']           = '400';
-            $config['quality']          = '100';
+            $config['width']            = '800';
+            $config['height']           = '500';
+            $config['quality']          = '95';
+            $this->image_lib->initialize($config);
+            $this->image_lib->resize();
+
+            $config['create_thumb']     = true;
+            $config['image_library']    = 'gd2';
+            $config['source_image']     = $this->upload->upload_path.$this->upload->file_name;
+            $config['maintain_ratio']   = true;
+            $config['width']            = '200';
+            $config['height']           = '200';
+            $config['quality']          = '90';
+            $config['new_image']        = $this->upload->upload_path.'/thumb/'.$this->upload->file_name;
             $this->image_lib->initialize($config);
             $this->image_lib->resize();
         }
@@ -80,9 +92,13 @@ class M_berita extends CI_Model {
         $data['gambar']         = $nama_gambar;
         $data['link_video']     = $this->input->post('link');
         $data['tgl_rilis']      = date('Y-m-d h:i:s');
+        $data['tahun']          = date('Y');
+        $data['bulan']          = date('m');
+        $data['tanggal']        = date('d');
         $data['tgl_penulisan']  = date('Y-m-d h:i:s');
         $data['sumber']         = $this->input->post('sumber');
-        $data['id_admin']       = 0;//$this->session->userdata('id_admin');
+        $data['id_admin']       = 1;//$this->session->userdata('id_admin');
+        $data['pengunjung']     = 0;
         $this->db->insert('tabel_berita',$data);
 
         $this->session->set_flashdata('pesanproses', 'Berita berhasil di input');
@@ -114,15 +130,27 @@ class M_berita extends CI_Model {
             $config['image_library']    = 'gd2';
             $config['source_image']     = $this->upload->upload_path.$this->upload->file_name;
             $config['maintain_ratio']   = true;
-            $config['width']            = '400';
-            $config['height']           = '400';
-            $config['quality']          = '100';
+            $config['width']            = '800';
+            $config['height']           = '500';
+            $config['quality']          = '95';
+            $this->image_lib->initialize($config);
+            $this->image_lib->resize();
+
+            $config['create_thumb']     = true;
+            $config['image_library']    = 'gd2';
+            $config['source_image']     = $this->upload->upload_path.$this->upload->file_name;
+            $config['maintain_ratio']   = true;
+            $config['width']            = '250';
+            $config['height']           = '250';
+            $config['quality']          = '90';
+            $config['new_image']        = $this->upload->upload_path.'/thumb/'.$this->upload->file_name;
             $this->image_lib->initialize($config);
             $this->image_lib->resize();
 
             $data['gambar']         = $nama_gambar;
 
             unlink('assets/xyz/'.$this->input->post('gambar_lama'));
+            unlink('assets/xyz/thumb/'.$this->input->post('gambar_lama'));
         }
 
         
@@ -148,6 +176,7 @@ class M_berita extends CI_Model {
         $this->db->where('id_berita', $id);
         if($this->db->delete('tabel_berita')){
             unlink('assets/xyz/'.$data['gambar']);
+            unlink('assets/xyz/thumb/'.$data['gambar']);
             echo "berhasil";
         }else{
             echo "gagal";

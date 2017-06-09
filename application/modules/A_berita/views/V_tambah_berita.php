@@ -17,7 +17,7 @@
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Gambar</label>
-                            <div class="col-sm-10"><input name="gambar_dp" type="file" class="form-control" required></div>
+                            <div class="col-sm-10"><input name="gambar_dp" type="file" class="form-control" required>Min width=500px and height=800px</div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Link Video Youtube</label>
